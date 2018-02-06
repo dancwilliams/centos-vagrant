@@ -1,5 +1,7 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "centos/7"
+  config.vm.hostname = "ntc"
+  config.vm.synced_folder ".", "/vagrant", type: "nfs"
   config.vm.network "private_network", ip: "192.168.33.95"
   config.vm.network :forwarded_port, guest: 3389, host: 5389
   config.vm.provider "virtualbox" do |v|
@@ -19,5 +21,9 @@ Vagrant.configure("2") do |config|
   sudo rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
   sudo yum-config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
   sudo yum -y install sublime-text
+  sudo yum -y install shutter
+  sudo useradd ntc
+  echo "ntc:ntc"|sudo chpasswd
+  sudo gpasswd -a ntc wheel
   SHELL
 end
