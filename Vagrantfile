@@ -22,8 +22,12 @@ Vagrant.configure("2") do |config|
   sudo yum-config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
   sudo yum -y install sublime-text
   sudo yum -y install shutter
+  sudo yum -y install pip
+  sudo yum -y install sshpass
+  yes w | sudo pip install --upgrade pip
+  yes w | sudo pip install ansible
   sudo useradd ntc
-  echo "ntc:ntc"|sudo chpasswd
+  echo "ntc:ntc123"|sudo chpasswd
   sudo gpasswd -a ntc wheel
   SHELL
 end
